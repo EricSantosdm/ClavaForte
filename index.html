@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clava Forte - Soluções em Datacenter e Hospedagem</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2a4365;
+            --secondary-color: #4299e1;
+            --light-color: #ebf8ff;
+            --dark-color: #1a365d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color) !important;
+            padding: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            color: var(--dark-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .service-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3182ce;
+            border-color: #3182ce;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '\201C';
+            font-size: 5rem;
+            color: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        
+        .testimonial-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .contact-info {
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .stats-item {
+            text-align: center;
+            padding: 30px 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stats-label {
+            font-size: 1rem;
+            color: #4a5568;
+        }
+        
+        .data-center-icon {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .pricing-body {
+            padding: 30px;
+            background-color: white;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .price small {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <h2 class="m-0">CLAVA FORTE</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicos">Serviços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#datacenter">Datacenter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#planos">Planos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#depoimentos">Depoimentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-4 fw-bold mb-4">Soluções em Infraestrutura de TI e Hospedagem</h1>
+                    <p class="lead mb-5">A Clava Forte oferece serviços de datacenter, hospedagem de sites, sistemas de câmeras e bancos de dados com segurança, performance e disponibilidade.</p>
+                    <a href="#planos" class="btn btn-primary btn-lg me-3">Nossos Planos</a>
+                    <a href="#contato" class="btn btn-outline-light btn-lg">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Números -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="stats-number">99,9%</div>
+                        <div class="stats-label">Uptime Garantido</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="stats-number">500+</div>
+                        <div class="stats-label">Clientes Ativos</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="stats-number">24/7</div>
+                        <div class="stats-label">Suporte Especializado</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="stats-number">10+</div>
+                        <div class="stats-label">Anos de Experiência</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section class="py-5" id="sobre">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sobre a Clava Forte" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Sobre Nós</h2>
+                    <p class="lead">A Clava Forte é especializada em soluções de infraestrutura de TI e hospedagem.</p>
+                    <p>Desde 2013, fornecemos serviços de datacenter, hospedagem de sites, sistemas de câmeras e bancos de dados para empresas de todos os portes. Nossa missão é oferecer infraestrutura confiável e segura para que nossos clientes possam focar em seus negócios.</p>
+                    <p>Com data centers próprios e equipe técnica especializada, garantimos a melhor performance e disponibilidade para seus sistemas e aplicações.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Infraestrutura Tier III</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Suporte 24/7/365</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Backup Diário</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>Segurança de Dados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nossos Serviços -->
+    <section class="py-5 bg-light" id="servicos">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Nossos Serviços</h2>
+                <p class="lead">Soluções completas para sua infraestrutura digital</p>
+            </div>
+            <div class="row">
+                <!-- Serviço 1 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" class="card-img-top service-img" alt="Datacenter">
+                        <div class="card-body">
+                            <h5 class="card-title">Hospedagem em Datacenter</h5>
+                            <p class="card-text">Infraestrutura de alta disponibilidade para colocation de servidores físicos com redundância de energia, conexão e refrigeração.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-primary me-2"></i> Racks dedicados</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Energia redundante</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Conexão de alta velocidade</li>
+                            </ul>
+                            <a href="#contato" class="btn btn-primary mt-3">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Serviço 2 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1376&q=80" class="card-img-top service-img" alt="Hospedagem de Sites">
+                        <div class="card-body">
+                            <h5 class="card-title">Hospedagem de Sites</h5>
+                            <p class="card-text">Hospedagem compartilhada, VPS e servidores dedicados para sites de todos os portes com alta performance e segurança.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-primary me-2"></i> SSL gratuito</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Backup diário</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Painel cPanel</li>
+                            </ul>
+                            <a href="#planos" class="btn btn-primary mt-3">Ver Planos</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Serviço 3 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1581092921461-39b2f2aa99b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top service-img" alt="Sistema de Câmeras">
+                        <div class="card-body">
+                            <h5 class="card-title">Hospedagem de Câmeras</h5>
+                            <p class="card-text">Armazenamento em nuvem para sistemas de CFTV com acesso remoto e análise inteligente de imagens.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-primary me-2"></i> Armazenamento escalável</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Acesso multiplataforma</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Retenção personalizada</li>
+                            </ul>
+                            <a href="#contato" class="btn btn-primary mt-3">Solicitar Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serviço 4 -->
+                <div class="col-md-6 mt-4">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" class="card-img-top service-img" alt="Banco de Dados">
+                        <div class="card-body">
+                            <h5 class="card-title">Hospedagem de Banco de Dados</h5>
+                            <p class="card-text">Soluções gerenciadas para MySQL, PostgreSQL, MongoDB e outros bancos de dados com alta disponibilidade.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-primary me-2"></i> Replicação automática</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Backup pontual</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Monitoramento 24/7</li>
+                            </ul>
+                            <a href="#contato" class="btn btn-primary mt-3">Consultar Especificações</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serviço 5 -->
+                <div class="col-md-6 mt-4">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" class="card-img-top service-img" alt="Desenvolvimento de Sites">
+                        <div class="card-body">
+                            <h5 class="card-title">Desenvolvimento de Sites</h5>
+                            <p class="card-text">Criação de sites institucionais responsivos e otimizados para SEO, com design moderno e tecnologia atualizada.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-primary me-2"></i> Design responsivo</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Integração com CMS</li>
+                                <li><i class="fas fa-check text-primary me-2"></i> Hospedagem inclusa</li>
+                            </ul>
+                            <a href="#contato" class="btn btn-primary mt-3">Solicitar Orçamento</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nosso Datacenter -->
+    <section class="py-5" id="datacenter">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Nosso Datacenter</h2>
+                <p class="lead">Infraestrutura de alta disponibilidade e segurança</p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="data-center-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h5>Energia Redundante</h5>
+                                <p>No-breaks e geradores garantem 100% de disponibilidade mesmo durante quedas de energia.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="data-center-icon">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
+                                <h5>Conexão Multi-link</h5>
+                                <p>Diversos links de alta velocidade com BGP para roteamento inteligente do tráfego.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="data-center-icon">
+                                    <i class="fas fa-snowflake"></i>
+                                </div>
+                                <h5>Refrigeração</h5>
+                                <p>Sistema de climatização redundante mantém temperatura e umidade ideais 24/7.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="text-center">
+                                <div class="data-center-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h5>Segurança Física</h5>
+                                <p>Biometria, câmeras, vigilância 24h e controle rigoroso de acesso às instalações.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1465&q=80" alt="Datacenter Clava Forte" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos de Hospedagem -->
+    <section class="py-5 bg-light" id="planos">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Planos de Hospedagem</h2>
+                <p class="lead">Escolha o plano ideal para seu projeto</p>
+            </div>
+            <div class="row">
+                <!-- Plano Básico -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4 class="mb-0">Básico</h4>
+                            <p class="mb-0">Ideal para sites pessoais</p>
+                        </div>
+                        <div class="pricing-body">
+                            <div class="price">R$ 29,90<small>/mês</small></div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 10GB de Armazenamento</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 100GB de Transferência</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 5 Contas de Email</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 1 Banco de Dados</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> SSL Gratuito</li>
+                            </ul>
+                            <a href="#contato" class="btn btn-outline-primary w-100">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Plano Profissional -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4 class="mb-0">Profissional</h4>
+                            <p class="mb-0">Para sites empresariais</p>
+                        </div>
+                        <div class="pricing-body">
+                            <div class="price">R$ 79,90<small>/mês</small></div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 50GB de Armazenamento</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Transferência Ilimitada</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 50 Contas de Email</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 10 Bancos de Dados</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> SSL Gratuito</li>
+                            </ul>
+                            <a href="#contato" class="btn btn-primary w-100">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Plano Premium -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h4 class="mb-0">Premium</h4>
+                            <p class="mb-0">Para e-commerces e sistemas</p>
+                        </div>
+                        <div class="pricing-body">
+                            <div class="price">R$ 149,90<small>/mês</small></div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> 100GB de Armazenamento</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Transferência Ilimitada</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Contas de Email Ilimitadas</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Bancos de Dados Ilimitados</li>
+                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> SSL Gratuito</li>
+                            </ul>
+                            <a href="#contato" class="btn btn-outline-primary w-100">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>Precisa de um plano personalizado? <a href="#contato">Fale conosco</a> para soluções sob medida.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="py-5" id="depoimentos">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Depoimentos</h2>
+                <p class="lead">O que nossos clientes dizem sobre nós</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente 1" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="mb-0">Carlos Mendes</h5>
+                                <small class="text-muted">Diretor - Agência WebPlus</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Hospedamos mais de 50 sites de nossos clientes na Clava Forte e a estabilidade é impressionante. Em 3 anos, nunca tivemos problemas de disponibilidade."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente 2" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="mb-0">Ana Paula Silva</h5>
+                                <small class="text-muted">Gerente - Loja Virtual BellaModa</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Nosso e-commerce roda na Clava Forte há 2 anos. Mesmo em datas como Black Friday, com picos de acesso, o site permanece estável e rápido."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Cliente 3" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="mb-0">Roberto Alves</h5>
+                                <small class="text-muted">CTO - Sistema ERP ProControl</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Migramos nosso ERP para os servidores da Clava Forte e a performance melhorou 40%. O suporte técnico é rápido e especializado, resolvendo qualquer questão em poucos minutos."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="py-5" id="contato">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title mb-4">Entre em Contato</h2>
+                    <p class="mb-5">Tem dúvidas, sugestões ou precisa de um orçamento? Preencha o formulário ao lado que nossa equipe entrará em contato o mais breve possível.</p>
+                    
+                    <div class="contact-info">
+                        <div class="d-flex mb-3">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Endereço</h5>
+                                <p>Av. Paulista, 1000 - 10º andar<br>São Paulo/SP - CEP 01310-100</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Telefone</h5>
+                                <p>(11) 1234-5678<br>(11) 98765-4321 (WhatsApp)</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <p>contato@clavaforte.com.br<br>vendas@clavaforte.com.br</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Horário de Atendimento</h5>
+                                <p>Segunda a Sexta: 8h às 18h<br>Plantão Técnico: 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Assunto</label>
+                            <select class="form-select" id="subject">
+                                <option value="orcamento">Solicitação de Orçamento</option>
+                                <option value="duvida">Dúvida sobre Serviços</option>
+                                <option value="suporte">Suporte Técnico</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Mensagem</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa -->
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.694833569995!2d-38.78320917712514!3d-7.385476099796822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjInMzcuNyJTIDM4wrA0NifNTkuNiJX!5e0!3m2!1spt-BR!2sbr!4v1623860413310!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h3 class="text-white mb-4">CLAVA FORTE</h3>
+                    <p>Soluções em datacenter, hospedagem de sites, sistemas de câmeras e bancos de dados com segurança, performance e disponibilidade.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="#sobre" class="text-white-50">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#servicos" class="text-white-50">Serviços</a></li>
+                        <li class="mb-2"><a href="#datacenter" class="text-white-50">Datacenter</a></li>
+                        <li class="mb-2"><a href="#planos" class="text-white-50">Planos</a></li>
+                        <li class="mb-2"><a href="#contato" class="text-white-50">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Serviços</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Hospedagem de Sites</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Hospedagem de Câmeras</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Hospedagem de Banco de Dados</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Colocation em Datacenter</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Desenvolvimento de Sites</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="text-white-50">Assine nossa newsletter para receber novidades e promoções.</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Seu email" aria-label="Seu email">
+                            <button class="btn btn-primary" type="button">Assinar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0 text-white-50">&copy; 2023 Clava Forte. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0 text-white-50">Desenvolvido por <a href="#" class="text-white">Clava Forte</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 100) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                
+                $('html, body').animate(
+                    {
+                        scrollTop: $($(this).attr('href')).offset().top - 70,
+                    },
+                    500,
+                    'linear'
+                );
+            });
+            
+            // Back to top button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').addClass('active');
+                } else {
+                    $('.back-to-top').removeClass('active');
+                }
+            });
+            
+            $('.back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 'slow');
+                return false;
+            });
+            
+            // Contact form submission
+            $('#contactForm').submit(function(e) {
+                e.preventDefault();
+                
+                // Here you would typically send the form data to your server
+                // For this example, we'll just show an alert
+                alert('Obrigado por sua mensagem! Entraremos em contato em breve.');
+                $('#contactForm')[0].reset();
+            });
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+</body>
+</html>
